@@ -1,0 +1,30 @@
+GET http://localhost:3000/todos/?search_q=clean
+###
+GET http://localhost:3000/todos/3/
+
+###
+GET http://localhost:3000/agenda/?date=2021-12-12
+
+###
+POST http://localhost:3000/todos/
+Content-Type: application/json
+
+{
+  "id": 3,
+ "todo": "Clean the garden",
+ "priority": "LOW",
+ "status": "TO DO",
+ "category": "HOME",
+ "dueDate": "2021-12-12"
+}
+
+### API 4
+PUT http://localhost:3000/todos/2/
+Content-Type: application/json
+
+{
+     "priority": "HIGH"
+}
+
+###
+DELETE http://localhost:3000/todos/23/
