@@ -3,6 +3,7 @@ const express = require("express");
 const { open } = require("sqlite");
 const path = require("path");
 const sqlite3 = require("sqlite3");
+const { isValid } = require("date-fns");
 
 const app = express();
 app.use(express.json());
@@ -231,7 +232,7 @@ app.get("/todos/:todoId/", async (request, response) => {
 // API 3
 app.get("/agenda/", async (request, response) => {
   const { date } = request.query;
-  try {
+  if(isValid(new Date(date))) {
     const formattedDate = format(new Date(date), "yyyy-MM-dd");
     const getTodoDueDateQuery = `
     SELECT *
@@ -252,7 +253,7 @@ app.get("/agenda/", async (request, response) => {
         };
       })
     );
-  } catch (e) {
+  } else {
     response.status(400);
     response.send("Invalid Due Date");
   }
